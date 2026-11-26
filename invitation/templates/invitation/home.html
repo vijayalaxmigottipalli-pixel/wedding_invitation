@@ -1,0 +1,237 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dileep Kumar & Sirisha – Wedding Invitation</title>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&family=Noto+Serif+Telugu:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{--maroon:#7a0f2b;--gold:#c8942e;--cream:#fff4e0;--cream2:#fde9c9}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{overflow-x:hidden}
+  body{background:#f3e2c4;display:flex;justify-content:center;min-height:100vh}
+  .card{position:relative;width:100%;max-width:620px;min-height:100vh;overflow:hidden;
+    background:radial-gradient(ellipse at 20% 60%,#fbe7c6 0,transparent 45%),
+               radial-gradient(ellipse at 80% 30%,#fff8ea 0,transparent 50%),
+               linear-gradient(#fff3dc,#fde8c8);
+    text-align:center;padding:28px 24px 40px;display:flex;flex-direction:column;align-items:center;font-family:'Cormorant Garamond',serif;color:var(--maroon)}
+
+  /* ---- deity picture (your kept image) ---- */
+  .deity{position:relative;z-index:2;width:46%;max-width:270px;aspect-ratio:395/408;margin-top:6px;overflow:hidden;
+    -webkit-mask-image:radial-gradient(ellipse at center,#000 62%,transparent 100%);mask-image:radial-gradient(ellipse at center,#000 62%,transparent 100%)}
+  .deity img{position:absolute;width:312.5%;max-width:none;left:-106.25%;top:-6.25%}
+  .arch{position:absolute;top:30px;left:50%;transform:translateX(-50%);width:80%;height:200px;
+    border:1.5px solid var(--gold);border-bottom:0;border-radius:90px 90px 0 0;opacity:.6;z-index:1}
+
+  /* ---- divider lines ---- */
+  .div{display:flex;align-items:center;justify-content:center;gap:10px;width:80%;margin:6px 0;color:var(--gold)}
+  .div::before,.div::after{content:"";flex:1;height:1px;background:var(--gold)}
+  .om{font-size:34px;line-height:1}
+  .dia{font-size:10px}
+
+  .blessing{font-weight:600;font-size:clamp(13px,3.4vw,18px);letter-spacing:.5px;margin:8px 0 14px}
+  .invite{font-style:italic;font-weight:600;font-size:clamp(16px,4vw,21px);line-height:1.4}
+  .name{font-family:'Great Vibes',cursive;font-size:clamp(50px,12vw,76px);line-height:1.3;color:var(--maroon)}
+  .hearts{color:var(--gold);font-size:30px;line-height:1}
+  .date{display:flex;align-items:center;gap:14px;margin-top:14px;font-weight:600;font-size:clamp(20px,5vw,28px)}
+  .date .cal{font-size:26px;color:var(--gold)}
+  .sub{font-style:italic;letter-spacing:4px;font-size:clamp(15px,4vw,20px);margin:4px 0 12px}
+
+  .btn-wrap{display:flex;align-items:center;gap:8px;margin:14px 0 10px;color:var(--gold);font-size:22px}
+  .btn{border:2px solid var(--gold);background:linear-gradient(#9a1235,#6d0a25);color:#fff;
+    font-weight:600;font-size:clamp(16px,4.2vw,22px);padding:12px 40px;border-radius:50px;cursor:pointer;
+    box-shadow:0 4px 10px rgba(122,15,43,.3),inset 0 0 0 3px rgba(255,255,255,.08)}
+  .btn:hover{filter:brightness(1.12)}
+  .foot{font-style:italic;font-size:clamp(14px,3.8vw,19px);line-height:1.3;margin-bottom:8px}
+  .lotus{color:var(--gold);font-size:16px}
+
+  /* ---- corner pictures cropped from opening.jpeg ---- */
+  .corner{position:absolute;z-index:0;overflow:hidden;pointer-events:none;
+    aspect-ratio:calc(var(--w)*1234/(var(--h)*1275))}
+  .corner img{position:absolute;max-width:none;width:calc(100% / var(--w));
+    left:calc(var(--x) / var(--w) * -100%);top:calc(var(--y) / var(--h) * -100%)}
+  .tl{top:0;left:0;width:31%;--x:0;--y:0;--w:.31;--h:.34;-webkit-mask-image:radial-gradient(ellipse at 0 0,#000 62%,transparent 100%);mask-image:radial-gradient(ellipse at 0 0,#000 62%,transparent 100%)}
+  .tr{top:0;right:0;width:29%;--x:.71;--y:0;--w:.29;--h:.35;-webkit-mask-image:radial-gradient(ellipse at 100% 0,#000 62%,transparent 100%);mask-image:radial-gradient(ellipse at 100% 0,#000 62%,transparent 100%)}
+  .br{bottom:0;right:0;width:31%;--x:.69;--y:.58;--w:.31;--h:.42;-webkit-mask-image:radial-gradient(ellipse at 100% 100%,#000 62%,transparent 100%);mask-image:radial-gradient(ellipse at 100% 100%,#000 62%,transparent 100%)}
+  .bl{bottom:0;left:0;width:27%;--x:0;--y:.675;--w:.27;--h:.325;-webkit-mask-image:radial-gradient(ellipse at 0 100%,#000 62%,transparent 100%);mask-image:radial-gradient(ellipse at 0 100%,#000 62%,transparent 100%)}
+  .card>:not(.corner):not(.arch):not(.lang){position:relative;z-index:1}
+
+  /* ---- highlighted Enter Invitation button ---- */
+  .btn{position:relative;overflow:hidden;font-size:clamp(18px,4.6vw,24px);padding:15px 52px;letter-spacing:1px;
+    background:linear-gradient(#b3163f,#6d0a25);border:2.5px solid #f0c75e;
+    box-shadow:0 0 0 4px rgba(240,199,94,.35),0 6px 18px rgba(122,15,43,.55),0 0 28px rgba(240,199,94,.7);
+    animation:pulse 1.8s ease-in-out infinite;transition:transform .2s}
+  .btn:hover{transform:scale(1.07);filter:brightness(1.15)}
+  .btn::after{content:"";position:absolute;top:0;left:-70%;width:45%;height:100%;
+    background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);
+    transform:skewX(-20deg);animation:shine 2.8s ease-in-out infinite}
+  @keyframes pulse{0%,100%{transform:scale(1);box-shadow:0 0 0 4px rgba(240,199,94,.35),0 6px 18px rgba(122,15,43,.55),0 0 22px rgba(240,199,94,.55)}
+    50%{transform:scale(1.06);box-shadow:0 0 0 9px rgba(240,199,94,.2),0 8px 22px rgba(122,15,43,.6),0 0 40px rgba(240,199,94,.95)}}
+  @keyframes shine{0%{left:-70%}60%,100%{left:130%}}
+
+  /* ---- language switch ---- */
+  .lang{position:absolute;top:12px;right:12px;z-index:5;display:flex;gap:6px}
+  .lang button{width:38px;height:38px;border-radius:50%;border:1.5px solid var(--gold);background:rgba(255,244,224,.9);
+    color:var(--maroon);font-size:18px;font-weight:700;cursor:pointer;font-family:'Noto Serif Telugu','Cormorant Garamond',serif}
+  .lang button.on{background:var(--maroon);color:#fff;box-shadow:0 0 10px rgba(200,148,46,.8)}
+  body.te .card{font-family:'Noto Serif Telugu','Cormorant Garamond',serif}
+  body.te .name{font-family:'Noto Serif Telugu',serif;font-weight:700;font-size:clamp(32px,8.5vw,52px);line-height:1.5}
+  body.te .blessing{font-size:clamp(12px,3.2vw,16px)}
+  body.te .invite{font-size:clamp(13px,3.4vw,17px);line-height:1.8}
+  body.te .sub{letter-spacing:1px}
+  body.te .date{font-size:clamp(18px,4.6vw,25px)}
+  body.te .btn{letter-spacing:0;font-size:clamp(15px,3.8vw,20px);padding:14px 36px}
+  body.te .foot{font-size:clamp(13px,3.4vw,16px);line-height:1.8}
+  .auto{font-size:14px;opacity:.7;margin-top:2px;min-height:20px}
+  body.te .auto{font-size:12px}
+
+  /* slow zoom-in before opening the next page */
+  .card{transform-origin:50% 38%;transition:transform 1.6s cubic-bezier(.45,0,.75,.35),opacity 1.6s ease-in}
+  .card.zoom{transform:scale(1.9);opacity:0}
+
+  /* ---- opening: 1) the card zooms in, 2) the home page content appears step by step ---- */
+  .card{animation:intro 1.4s cubic-bezier(.2,.8,.2,1) backwards}
+  @keyframes intro{from{opacity:0;transform:scale(.78)}to{opacity:1;transform:scale(1)}}
+  .card>:not(.corner):not(.arch):not(.lang){animation:rise .8s ease-out backwards}
+  @keyframes rise{from{opacity:0;transform:translateY(18px) scale(.96)}to{opacity:1;transform:none}}
+  .corner,.arch,.lang{animation:fadein 1.2s ease-out .9s backwards}
+  @keyframes fadein{from{opacity:0}to{opacity:1}}
+  .arch{animation-name:fadearch}
+  @keyframes fadearch{from{opacity:0}to{opacity:.6}}
+
+  @media (prefers-reduced-motion:reduce){
+    .card,.card>:not(.corner):not(.arch):not(.lang),.corner,.arch,.lang{animation:none}
+  }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="lang"><button type="button" data-l="en" title="English">A</button><button type="button" data-l="te" title="తెలుగు">అ</button></div>
+  <div class="corner tl"><img src="{% static 'invitation/images/opening.jpeg' %}" alt=""></div>
+  <div class="corner tr"><img src="{% static 'invitation/images/opening.jpeg' %}" alt=""></div>
+  <div class="corner br"><img src="{% static 'invitation/images/opening.jpeg' %}" alt=""></div>
+  <div class="corner bl"><img src="{% static 'invitation/images/opening.jpeg' %}" alt=""></div>
+  <!-- decorations -->
+
+  <!-- content -->
+  <div class="arch"></div>
+  <div class="deity"><img src="{% static 'invitation/images/opening.jpeg' %}" alt="Sri Venkateswara Swamy"></div>
+
+  <div class="div"><span class="dia">◆</span><span class="om">ॐ</span><span class="dia">◆</span></div>
+  <p class="blessing" data-i18n="blessing">|| Sri Venkateswara Swamyvari Ashissulatho ||</p>
+  <p class="invite" data-i18n="invite">Together with our families<br>We cordially invite you to celebrate the wedding of</p>
+
+  <h1 class="name" data-i18n="n1">Dileep Kumar</h1>
+  <div class="div"><span class="hearts">♡♡</span></div>
+  <h1 class="name" data-i18n="n2">Sirisha</h1>
+
+  <div class="date"><span class="cal">🗓</span><span data-i18n="date">December 3, 2026</span></div>
+  <p class="sub" data-i18n="sub">Wedding Ceremony</p>
+  <div class="div"><span class="lotus">❁</span></div>
+
+  <div class="btn-wrap"><span>❦</span>
+    <button class="btn" onclick="openInvitation()"><span data-i18n="btn">Enter Invitation</span> &nbsp;›</button>
+  <span style="transform:scaleX(-1)">❦</span></div>
+
+  <p class="auto" id="auto"></p>
+  <p class="foot" data-i18n="foot">Your presence will make our happiness<br>even more special...</p>
+  <div class="div"><span class="lotus">❁</span></div>
+</div>
+<script>
+  var T={
+    en:{blessing:"|| Sri Venkateswara Swamyvari Ashissulatho ||",
+        invite:"Together with our families<br>We cordially invite you to celebrate the wedding of",
+        n1:"Dileep Kumar",n2:"Sirisha",date:"December 3, 2026",sub:"Wedding Ceremony",
+        btn:"Enter Invitation",foot:"Your presence will make our happiness<br>even more special..."},
+    te:{blessing:"|| శ్రీ వేంకటేశ్వర స్వామివారి ఆశీస్సులతో ||",
+        invite:"మా కుటుంబాలతో కలిసి<br>మా వివాహ వేడుకకు మిమ్మల్ని సాదరంగా ఆహ్వానిస్తున్నాము",
+        n1:"దిలీప్ కుమార్",n2:"శిరీష",date:"డిసెంబర్ 3, 2026",sub:"వివాహ మహోత్సవం",
+        btn:"ఆహ్వానంలోకి ప్రవేశించండి",foot:"మీ రాక మా ఆనందాన్ని<br>మరింత ప్రత్యేకం చేస్తుంది..."}
+  };
+  function setLang(l){
+    document.querySelectorAll('[data-i18n]').forEach(function(e){e.innerHTML=T[l][e.dataset.i18n]});
+    document.body.classList.toggle('te',l==='te');
+    document.documentElement.lang=l;
+    document.querySelectorAll('.lang button').forEach(function(b){b.classList.toggle('on',b.dataset.l===l)});
+    try{localStorage.setItem('lang',l)}catch(e){}
+  }
+  document.querySelectorAll('.lang button').forEach(function(b){b.onclick=function(){setLang(b.dataset.l)}});
+  var saved='en';try{saved=localStorage.getItem('lang')||'en'}catch(e){}
+  setLang(saved);
+
+  /* opening animation: content appears one after another once the card has zoomed in */
+  (function(){
+    var START=0.9, GAP=0.11;   // seconds: when the first item appears, and the gap between items
+    document.querySelectorAll('.card > :not(.corner):not(.arch):not(.lang)').forEach(function(el,i){
+      el.style.animationDelay=(START+i*GAP)+'s';
+    });
+  })();
+</script>
+<script>
+  /* auto-open the next page after 10 seconds (change AUTO_SECONDS to adjust) */
+  var AUTO_SECONDS=10,left=AUTO_SECONDS;
+  function autoTick(){
+    var te=document.documentElement.lang==='te';
+    document.getElementById('auto').textContent=te?(left+' సెకన్లలో ఆటోమేటిక్‌గా తెరుచుకుంటుంది...'):('Opening automatically in '+left+'s...');
+    if(left<=0){openInvitation();return}
+    left--;setTimeout(autoTick,1000);
+  }
+  document.querySelectorAll('.lang button').forEach(function(b){b.addEventListener('click',function(){left=AUTO_SECONDS})});
+  autoTick();
+
+  var going=false;
+  function openInvitation(){
+    if(going)return;going=true;
+    document.body.style.overflow='hidden';
+    var card=document.querySelector('.card');
+    card.style.animation='none';   // stop the opening animation if it is still running
+    card.classList.add('zoom');
+    setTimeout(function(){window.location.href='/details/'},1600); /* opens after the zoom */
+  }
+</script>
+<script>
+  /* auto scroll: starts after a short delay, pauses when the user interacts, resumes when idle.
+     (Only does anything if the card is taller than the screen, e.g. on small phones.) */
+  (function(){
+    var SPEED = 50;       // pixels per second (lower = slower)
+    var DELAY = 4000;     // wait before the first start (ms), after the opening animation
+    var RESUME = 2500;    // idle time after the user stops before it resumes (ms)
+    var running = false, pos = 0, last = 0, timer = null;
+    var evts = ['wheel','touchstart','touchmove','touchend','keydown','mousedown','mouseup'];
+
+    function step(ts){
+      if(!running || going) return;
+      if(!last) last = ts;
+      var dt = (ts - last) / 1000;
+      last = ts;
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      pos += SPEED * dt;
+      if(pos >= max){ window.scrollTo(0, max); running = false; return; }
+      window.scrollTo(0, pos);
+      requestAnimationFrame(step);
+    }
+
+    function start(){
+      if(running || going) return;
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      if((window.scrollY || 0) >= max - 2) return;   // nothing to scroll / already at the bottom
+      pos = window.scrollY || 0;
+      running = true;
+      last = 0;
+      requestAnimationFrame(step);
+    }
+
+    // any user action: pause now, resume after RESUME ms of no activity
+    function onUser(){
+      running = false;
+      clearTimeout(timer);
+      timer = setTimeout(start, RESUME);
+    }
+
+    evts.forEach(function(n){ window.addEventListener(n, onUser, {passive:true}); });
+    timer = setTimeout(start, DELAY);
+  })();
+</script>
+</body>
+</html>

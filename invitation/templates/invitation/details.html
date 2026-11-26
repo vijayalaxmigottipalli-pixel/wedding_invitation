@@ -1,0 +1,317 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dileep Kumar & Sirisha – Wedding Details</title>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Noto+Serif+Telugu:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{--maroon:#7a0f2b;--gold:#c8942e;--amber:#e07b00}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{min-height:100vh;overflow-x:hidden;font-family:'Cormorant Garamond',serif;color:var(--maroon);
+    background:radial-gradient(ellipse at 20% 70%,#fbe7c6 0,transparent 45%),radial-gradient(ellipse at 80% 20%,#fff8ea 0,transparent 50%),linear-gradient(#fff3dc,#fde8c8)}
+
+  /* ---- corner pictures cropped from opening.jpeg (same as first page) ---- */
+  .corner{position:fixed;z-index:0;overflow:hidden;pointer-events:none;width:clamp(120px,22vw,300px);
+    aspect-ratio:calc(var(--w)*1234/(var(--h)*1275))}
+  .corner img{position:absolute;max-width:none;width:calc(100% / var(--w));left:calc(var(--x) / var(--w) * -100%);top:calc(var(--y) / var(--h) * -100%)}
+  .tl{top:0;left:0;--x:0;--y:0;--w:.31;--h:.34;transform-origin:0 0;animation:sway 5s ease-in-out infinite;
+    -webkit-mask-image:radial-gradient(ellipse at 0 0,#000 62%,transparent 100%);mask-image:radial-gradient(ellipse at 0 0,#000 62%,transparent 100%)}
+  .tr{top:0;right:0;--x:.71;--y:0;--w:.29;--h:.35;transform-origin:100% 0;animation:sway 6s ease-in-out infinite reverse;
+    -webkit-mask-image:radial-gradient(ellipse at 100% 0,#000 62%,transparent 100%);mask-image:radial-gradient(ellipse at 100% 0,#000 62%,transparent 100%)}
+  .br{bottom:0;right:0;--x:.69;--y:.58;--w:.31;--h:.42;
+    -webkit-mask-image:radial-gradient(ellipse at 100% 100%,#000 62%,transparent 100%);mask-image:radial-gradient(ellipse at 100% 100%,#000 62%,transparent 100%)}
+  .bl{bottom:0;left:0;--x:0;--y:.675;--w:.27;--h:.325;
+    -webkit-mask-image:radial-gradient(ellipse at 0 100%,#000 62%,transparent 100%);mask-image:radial-gradient(ellipse at 0 100%,#000 62%,transparent 100%)}
+  @keyframes sway{0%,100%{transform:rotate(-1.3deg)}50%{transform:rotate(1.3deg)}}
+
+  /* ---- falling petals ---- */
+  .petal{position:fixed;top:-30px;z-index:0;pointer-events:none;background:#f8c4c4;border-radius:70% 0 70% 0;opacity:.85;animation:fall linear infinite}
+  @keyframes fall{0%{transform:translate(0,-5vh) rotate(0)}50%{transform:translate(40px,55vh) rotate(180deg)}100%{transform:translate(-30px,110vh) rotate(360deg)}}
+
+  /* ---- top buttons ---- */
+  .lang{position:fixed;top:12px;right:12px;z-index:5;display:flex;gap:6px}
+  .lang button,.back{width:38px;height:38px;border-radius:50%;border:1.5px solid var(--gold);background:rgba(255,244,224,.92);color:var(--maroon);
+    font-size:18px;font-weight:700;cursor:pointer;font-family:'Noto Serif Telugu','Cormorant Garamond',serif;text-decoration:none;display:flex;align-items:center;justify-content:center}
+  .lang button.on{background:var(--maroon);color:#fff;box-shadow:0 0 10px rgba(200,148,46,.8)}
+  .back{position:fixed;top:12px;left:12px;z-index:5}
+
+  /* ---- main layout ---- */
+  .wrap{position:relative;z-index:1;max-width:1040px;margin:0 auto;min-height:100vh;padding:80px 24px;
+    display:grid;grid-template-columns:minmax(260px,420px) 1fr;gap:64px;align-items:center}
+  .photo{position:relative;aspect-ratio:3/4;border-radius:38px;padding:5px;
+    background:linear-gradient(135deg,#f6c453,#d98a00,#f6c453);box-shadow:0 0 45px rgba(224,123,0,.45)}
+  .photo .in{width:100%;height:100%;border-radius:33px;overflow:hidden;background:#fde8c8;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px}
+  .photo img{width:100%;height:100%;object-fit:cover;display:block}
+  .eyebrow{display:flex;align-items:center;gap:14px;color:var(--amber);letter-spacing:6px;font-size:14px;font-weight:600;margin-bottom:10px;text-transform:uppercase}
+  .eyebrow::before,.eyebrow::after{content:"";width:48px;height:1px;background:var(--amber)}
+  .names{font-family:'Great Vibes',cursive;font-weight:400;font-size:clamp(46px,7.2vw,86px);line-height:1.25}
+  .names span{white-space:nowrap}
+  .and{display:block;font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500;font-size:.32em;color:var(--amber);margin:0 0 0 6px}
+  .info{display:flex;gap:34px;margin-top:34px;flex-wrap:wrap}
+  .info div+div{border-left:1px solid rgba(122,15,43,.3);padding-left:34px}
+  .info small{display:block;color:var(--amber);letter-spacing:2px;font-size:13px;font-weight:600;text-transform:uppercase;margin-bottom:6px}
+  .info b{font-size:clamp(20px,3vw,28px);font-weight:600}
+
+  /* ---- buttons row: Save the Date (Next button is under the countdown) ---- */
+  .ctas{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px}
+  .cta{display:inline-flex;align-items:center;gap:10px;padding:16px 34px;border-radius:50px;border:2px solid #e07b00;cursor:pointer;
+    background:linear-gradient(#e98a10,#d06e00);color:#fff;font-family:inherit;font-weight:700;letter-spacing:2px;font-size:16px;text-transform:uppercase;
+    text-decoration:none;box-shadow:0 6px 18px rgba(224,123,0,.45);transition:transform .2s}
+  .cta:hover{transform:scale(1.06)}
+  .cta.next{background:linear-gradient(160deg,#8a2335,#4a0a18);color:#f8e6b8;border-color:#f1d9a8;box-shadow:0 6px 18px rgba(122,15,43,.35)}
+  .nextwrap{margin-top:34px}
+  .cta.next .ar{display:inline-block;animation:nudge 1.2s ease-in-out infinite}
+  @keyframes nudge{0%,100%{transform:translateX(0)}50%{transform:translateX(6px)}}
+
+  body.te{font-family:'Noto Serif Telugu','Cormorant Garamond',serif}
+  body.te .names{font-size:clamp(36px,6.5vw,70px);line-height:1.35;font-weight:700}
+  body.te .eyebrow,body.te .info small,body.te .cta{letter-spacing:0}
+  body.te .info b{font-size:clamp(17px,2.4vw,23px)}
+
+  @media(max-width:760px){
+    .wrap{grid-template-columns:1fr;gap:34px;text-align:center;padding-top:70px}
+    .photo{width:min(78vw,360px);margin:0 auto}
+    .eyebrow{justify-content:center;letter-spacing:4px}
+    .and{margin-left:0}
+    .info{justify-content:center;gap:20px}.info div+div{padding-left:20px}
+    .ctas{justify-content:center}
+  }
+
+  /* ---- music button ---- */
+  .music{position:fixed;top:12px;right:104px;z-index:5;width:38px;height:38px;border-radius:50%;border:1.5px solid var(--gold);
+    background:rgba(255,244,224,.92);font-size:17px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .music.on{box-shadow:0 0 10px rgba(200,148,46,.9)}
+
+  /* ---- countdown ---- */
+  .count{position:relative;z-index:1;text-align:center;padding:40px 16px 110px}
+  .eyebrow2{color:#a8741a;letter-spacing:6px;font-size:14px;font-weight:600;text-transform:uppercase}
+  .count h2{font-weight:600;font-size:clamp(26px,5vw,52px);letter-spacing:2px;text-transform:uppercase;margin-top:8px}
+  .dv{display:flex;align-items:center;justify-content:center;gap:12px;color:var(--gold);width:min(420px,70%);margin:16px auto 30px}
+  .dv::before,.dv::after{content:"";flex:1;height:1px;background:var(--gold)}
+  .boxes{display:flex;justify-content:center;gap:clamp(8px,2vw,24px)}
+  .box{position:relative;width:clamp(70px,19vw,200px);padding:22px 4px 16px;border-radius:12px 12px 40px 40px;border:3px solid #f1d9a8;
+    background:radial-gradient(ellipse at 50% 0,#8a2335,#4a0a18);color:#f1d9a0;box-shadow:0 10px 24px rgba(122,15,43,.3)}
+  .box::before{content:"◆";position:absolute;top:6px;left:50%;transform:translateX(-50%);font-size:9px;color:var(--gold)}
+  .box b{display:block;font-weight:500;font-size:clamp(32px,6vw,64px);line-height:1.1}
+  .box small{display:block;margin-top:8px;letter-spacing:3px;font-size:clamp(9px,1.6vw,14px);text-transform:uppercase}
+  .when{margin-top:30px;font-weight:600;font-size:clamp(17px,2.6vw,24px)}
+  .when2{margin-top:6px;opacity:.8;font-size:clamp(14px,2vw,18px)}
+  body.te .count h2,body.te .eyebrow2,body.te .box small{letter-spacing:0;text-transform:none}
+  body.te .count h2{font-size:clamp(22px,4vw,40px)}
+
+  /* ---- zoom effects ---- */
+  /* slow zoom inside the photo frame (the frame stays fixed, so nothing overflows) */
+  .photo .in img{transform-origin:center;animation:kb 14s ease-in-out infinite alternate}
+  @keyframes kb{from{transform:scale(1)}to{transform:scale(1.12)}}
+
+  /* zoom-in on appear */
+  .zin{opacity:0;transform:scale(.85);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.8,.2,1)}
+  .zin.show{opacity:1;transform:none}
+
+  /* ---- zoom-through exit to the venue page ---- */
+  .veil{position:fixed;inset:0;z-index:9;pointer-events:none;opacity:0;
+    background:radial-gradient(ellipse at center,#fff8ea,#fde8c8);transition:opacity .9s ease-in}
+  .leaving .veil{opacity:1}
+  .leaving .wrap,.leaving .count{transform:scale(1.4);opacity:0;
+    transition:transform .9s cubic-bezier(.5,0,.9,.4),opacity .9s ease-in}
+
+  @media (prefers-reduced-motion:reduce){
+    .photo .in img{animation:none}
+    .zin{opacity:1;transform:none;transition:none}
+    .leaving .wrap,.leaving .count{transition:none}
+  }
+</style>
+</head>
+<body>
+  <div class="veil"></div>
+  <div class="corner tl"><img src="{% static 'invitation/images/opening.jpeg' %}" alt=""></div>
+  <div class="corner tr"><img src="{% static 'invitation/images/opening.jpeg' %}" alt=""></div>
+  <div class="corner br"><img src="{% static 'invitation/images/opening.jpeg' %}" alt=""></div>
+  <div class="corner bl"><img src="{% static 'invitation/images/opening.jpeg' %}" alt=""></div>
+
+  <audio id="bgm" loop preload="auto"><source src="{% static 'invitation/audio/song.mp3' %}" type="audio/mpeg"></audio>
+  <button type="button" class="music" id="music" title="Music">🔇</button>
+  <a class="back" href="/" title="Back">‹</a>
+  <div class="lang"><button type="button" data-l="en" title="English">A</button><button type="button" data-l="te" title="తెలుగు">అ</button></div>
+
+  <main class="wrap">
+    <!-- CHANGE THE COUPLE PHOTO: replace static/invitation/images/couple.jpg (keep the same name) -->
+    <div class="photo"><div class="in">
+      <img src="{% static 'invitation/images/couple.jpg' %}" alt="Dileep Kumar and Sirisha"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+      <span style="display:none">Add your photo as<br><b>couple.jpg</b></span>
+    </div></div>
+
+    <section>
+      <div class="eyebrow" data-i18n="save">Save the date</div>
+      <h1 class="names"><span data-i18n="n1">Dileep Kumar</span><span class="and" data-i18n="and">and</span><span data-i18n="n2">Sirisha</span></h1>
+      <div class="info">
+        <div><small data-i18n="dayl">The Day</small><b data-i18n="date">December 3, 2026</b></div>
+        <div><small data-i18n="placel">The Place</small><b data-i18n="place">Venue Name, City</b></div>
+      </div>
+      <div class="ctas">
+        <a class="cta" id="cal" target="_blank" rel="noopener">📅 <span data-i18n="btn">Save the Date</span></a>
+      </div>
+    </section>
+  </main>
+
+  <section class="count">
+    <p class="eyebrow2" data-i18n="cdk">The Sacred Muhurtham</p>
+    <h2 data-i18n="cdt">Counting Down to Forever</h2>
+    <div class="dv"><span>❁</span></div>
+    <div class="boxes">
+      <div class="box"><b id="cd">00</b><small data-i18n="ld">Days</small></div>
+      <div class="box"><b id="ch">00</b><small data-i18n="lh">Hours</small></div>
+      <div class="box"><b id="cm">00</b><small data-i18n="lm">Minutes</small></div>
+      <div class="box"><b id="cs">00</b><small data-i18n="ls">Seconds</small></div>
+    </div>
+    <p class="when" data-i18n="when">Thursday, December 3, 2026 · 9:03 AM IST</p>
+    <p class="when2" data-i18n="when2">Dhanussu Lagnam · Lunch from 12:00 noon at the venue</p>
+    <!-- LINK TO VENUE PAGE: change "/venue/" if your venue page URL is different -->
+    <div class="nextwrap"><a class="cta next" id="venuebtn" href="/venue/"><span data-i18n="btn2">Next</span> <span class="ar">➜</span></a></div>
+  </section>
+
+<script>
+  var T={
+    en:{save:"Save the date",n1:"Dileep Kumar",and:"and",n2:"Sirisha",dayl:"The Day",date:"December 3, 2026",
+        placel:"The Place",place:"A & A Farm House, Aliyabad, Hyderabad",btn:"Save the Date",btn2:"Next",cdk:"The Sacred Muhurtham",cdt:"Counting Down to Forever",ld:"Days",lh:"Hours",lm:"Minutes",ls:"Seconds",when:"Thursday, December 3, 2026 · 9:03 AM IST",when2:"Dhanussu Lagnam · Lunch from 12:00 noon at the venue"},
+    te:{save:"తేదీని గుర్తుంచుకోండి",n1:"దిలీప్ కుమార్",and:"మరియు",n2:"శిరీష",dayl:"తేదీ",date:"డిసెంబర్ 3, 2026",
+        placel:"వేదిక",place:"అ & ఆ ఫార్మ్ హౌస్, అలియాబాద్, హైదరాబాద్",btn:"క్యాలెండర్‌లో జోడించు",btn2:"తదుపరి",cdk:"శుభ ముహూర్తం",cdt:"శాశ్వత బంధం వైపు లెక్కింపు",ld:"రోజులు",lh:"గంటలు",lm:"నిమిషాలు",ls:"సెకన్లు",when:"గురువారం, డిసెంబర్ 3, 2026 · ఉదయం 9:03",when2:"ధనుస్సు లగ్నం · మధ్యాహ్నం 12:00 నుండి విందు"}
+  };
+  function setLang(l){
+    document.querySelectorAll('[data-i18n]').forEach(function(e){e.innerHTML=T[l][e.dataset.i18n]});
+    document.body.classList.toggle('te',l==='te');
+    document.documentElement.lang=l;
+    document.querySelectorAll('.lang button').forEach(function(b){b.classList.toggle('on',b.dataset.l===l)});
+    try{localStorage.setItem('lang',l)}catch(e){}
+  }
+  document.querySelectorAll('.lang button').forEach(function(b){b.onclick=function(){setLang(b.dataset.l)}});
+  var saved='en';try{saved=localStorage.getItem('lang')||'en'}catch(e){}
+  setLang(saved);
+
+  /* Google Calendar link: change date (YYYYMMDD/next day), title and location here */
+  document.getElementById('cal').href='https://calendar.google.com/calendar/render?action=TEMPLATE'
+    +'&text='+encodeURIComponent('Wedding of Dileep Kumar & Sirisha – Muhurtham 9:03 AM')
+    +'&dates=20261203T033300Z/20261203T053300Z&location='+encodeURIComponent('A & A Farm House, Near NICMAR College, Lalgadi Malakpet, Aliyabad, Hyderabad');
+
+  /* background song: starts after Enter Invitation (or on the first tap if the browser blocks it) */
+  var bgm=document.getElementById('bgm'),mb=document.getElementById('music');
+  bgm.volume=.7;
+  function upd(){mb.textContent=bgm.paused?'🔇':'🔊';mb.classList.toggle('on',!bgm.paused)}
+  function kick(e){
+    if(e&&e.target.closest&&e.target.closest('.music'))return;
+    bgm.play().then(function(){upd();off()}).catch(upd);
+  }
+  function off(){['click','touchstart','keydown'].forEach(function(n){document.removeEventListener(n,kick)})}
+  ['click','touchstart','keydown'].forEach(function(n){document.addEventListener(n,kick)});
+  mb.onclick=function(e){e.stopPropagation();if(bgm.paused){bgm.play().then(upd).catch(upd)}else{bgm.pause();upd()}off()};
+  bgm.play().then(function(){upd();off()}).catch(upd);
+
+  /* countdown to the muhurtham: Thursday 3 Dec 2026, 09:03 AM IST */
+  var target=new Date('2026-12-03T09:03:00+05:30').getTime();
+  function pad(n){return (n<10?'0':'')+n}
+  function tick(){
+    var t=Math.max(0,target-Date.now()),sec=Math.floor(t/1000);
+    document.getElementById('cd').textContent=pad(Math.floor(sec/86400));
+    document.getElementById('ch').textContent=pad(Math.floor(sec%86400/3600));
+    document.getElementById('cm').textContent=pad(Math.floor(sec%3600/60));
+    document.getElementById('cs').textContent=pad(sec%60);
+  }
+  tick();setInterval(tick,1000);
+
+  /* falling petals */
+  for(var i=0;i<16;i++){
+    var p=document.createElement('i');p.className='petal';
+    var s=10+Math.random()*10;
+    p.style.cssText='left:'+Math.random()*100+'%;width:'+s+'px;height:'+(s*1.4)+'px;animation-duration:'+(9+Math.random()*9)+'s;animation-delay:-'+Math.random()*14+'s';
+    document.body.appendChild(p);
+  }
+
+  /* zoom-in when elements come into view */
+  (function(){
+    var els=document.querySelectorAll('.photo,.names,.info,.count h2,.box');
+    var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(e.isIntersecting){e.target.classList.add('show');io.unobserve(e.target)}
+      });
+    },{threshold:.2}):null;
+    var b=0;
+    els.forEach(function(el){
+      el.classList.add('zin');
+      if(el.classList.contains('box')){el.style.transitionDelay=(b++*0.12)+'s'}
+      if(io){setTimeout(function(){io.observe(el)},50)}
+      else{el.classList.add('show')}
+    });
+  })();
+
+  /* auto scroll: starts after a short delay, stops when the user interacts */
+  (function(){
+    var SPEED = 50;       // pixels per second (lower = slower)
+    var DELAY = 3000;     // wait before the first start (ms)
+    var RESUME = 2500;    // idle time after the user stops before it resumes (ms)
+    var running = false, pos = 0, last = 0, timer = null, finished = false;
+    var evts = ['wheel','touchstart','touchmove','touchend','keydown','mousedown','mouseup'];
+
+    /* ---- auto move to the venue page after the end of this page ---- */
+    var NAV_WAIT = 2500;  // how long to stay at the countdown before moving on (ms)
+    var ZOOM_MS = 900;    // length of the zoom-out transition (ms)
+    var navTimer = null, leaving = false;
+
+    function goNext(){
+      clearTimeout(navTimer);
+      navTimer = setTimeout(function(){
+        leaving = true;
+        var url = document.getElementById('venuebtn').href;   // same link as the Next button
+        if(window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches){
+          location.href = url; return;
+        }
+        var vy = window.innerHeight / 2;
+        ['.wrap','.count'].forEach(function(s){
+          var el = document.querySelector(s), r = el.getBoundingClientRect();
+          el.style.transformOrigin = '50% ' + (vy - r.top) + 'px';   // zoom towards the screen centre
+        });
+        document.body.classList.add('leaving');
+        setTimeout(function(){ location.href = url; }, ZOOM_MS);
+      }, NAV_WAIT);
+    }
+
+    function step(ts){
+      if(!running) return;
+      if(!last) last = ts;
+      var dt = (ts - last) / 1000;
+      last = ts;
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      pos += SPEED * dt;
+      if(pos >= max){ window.scrollTo(0, max); running = false; finished = true; goNext(); return; }
+      window.scrollTo(0, pos);
+      requestAnimationFrame(step);
+    }
+
+    function start(){
+      if(running) return;
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      if((window.scrollY || 0) >= max - 2){ finished = true; goNext(); return; }  // already at bottom
+      finished = false;
+      pos = window.scrollY || 0;
+      running = true;
+      last = 0;
+      requestAnimationFrame(step);
+    }
+
+    // any user action: pause now, resume after RESUME ms of no activity
+    function onUser(){
+      if(leaving) return;          // already zooming out, let it finish
+      clearTimeout(navTimer);      // user took control: cancel the pending jump
+      running = false;
+      clearTimeout(timer);
+      timer = setTimeout(start, RESUME);
+    }
+
+    evts.forEach(function(n){ window.addEventListener(n, onUser, {passive:true}); });
+    timer = setTimeout(start, DELAY);
+  })();
+</script>
+</body>
+</html>

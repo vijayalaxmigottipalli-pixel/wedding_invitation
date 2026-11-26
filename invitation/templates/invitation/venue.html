@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wedding Details – Dileep Kumar & Sirisha</title>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Noto+Serif+Telugu:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{--maroon:#7a0f2b;--gold:#c8942e;--amber:#e07b00}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{min-height:100vh;overflow-x:hidden;font-family:'Cormorant Garamond',serif;color:var(--maroon);
+    background:radial-gradient(ellipse at 20% 70%,#fbe7c6 0,transparent 45%),radial-gradient(ellipse at 80% 20%,#fff8ea 0,transparent 50%),linear-gradient(#fff3dc,#fde8c8)}
+
+  /* corners cropped from opening.jpeg (same background as the other pages) */
+  .corner{position:fixed;z-index:0;overflow:hidden;pointer-events:none;width:clamp(120px,22vw,300px);aspect-ratio:calc(var(--w)*1234/(var(--h)*1275))}
+  .corner img{position:absolute;max-width:none;width:calc(100% / var(--w));left:calc(var(--x) / var(--w) * -100%);top:calc(var(--y) / var(--h) * -100%)}
+  .tl{top:0;left:0;--x:0;--y:0;--w:.31;--h:.34;transform-origin:0 0;animation:sway 5s ease-in-out infinite;-webkit-mask-image:radial-gradient(ellipse at 0 0,#000 62%,transparent 100%);mask-image:radial-gradient(ellipse at 0 0,#000 62%,transparent 100%)}
+  .tr{top:0;right:0;--x:.71;--y:0;--w:.29;--h:.35;transform-origin:100% 0;animation:sway 6s ease-in-out infinite reverse;-webkit-mask-image:radial-gradient(ellipse at 100% 0,#000 62%,transparent 100%);mask-image:radial-gradient(ellipse at 100% 0,#000 62%,transparent 100%)}
+  .br{bottom:0;right:0;--x:.69;--y:.58;--w:.31;--h:.42;-webkit-mask-image:radial-gradient(ellipse at 100% 100%,#000 62%,transparent 100%);mask-image:radial-gradient(ellipse at 100% 100%,#000 62%,transparent 100%)}
+  .bl{bottom:0;left:0;--x:0;--y:.675;--w:.27;--h:.325;-webkit-mask-image:radial-gradient(ellipse at 0 100%,#000 62%,transparent 100%);mask-image:radial-gradient(ellipse at 0 100%,#000 62%,transparent 100%)}
+  @keyframes sway{0%,100%{transform:rotate(-1.3deg)}50%{transform:rotate(1.3deg)}}
+  .petal{position:fixed;top:-30px;z-index:0;pointer-events:none;background:#f8c4c4;border-radius:70% 0 70% 0;opacity:.85;animation:fall linear infinite}
+  @keyframes fall{0%{transform:translate(0,-5vh) rotate(0)}50%{transform:translate(40px,55vh) rotate(180deg)}100%{transform:translate(-30px,110vh) rotate(360deg)}}
+
+  /* ---- top-right round buttons: music, A, అ ---- */
+  .lang{position:fixed;top:12px;right:12px;z-index:5;display:flex;gap:6px}
+  .lang button,.back{width:38px;height:38px;border-radius:50%;border:1.5px solid var(--gold);background:rgba(255,244,224,.92);color:var(--maroon);
+    font-size:18px;font-weight:700;cursor:pointer;font-family:'Noto Serif Telugu','Cormorant Garamond',serif;text-decoration:none;display:flex;align-items:center;justify-content:center}
+  .lang button.on{background:var(--maroon);color:#fff;box-shadow:0 0 10px rgba(200,148,46,.8)}
+  .lang button.mus{font-size:17px}
+  .back{position:fixed;top:12px;left:12px;z-index:5}
+
+  .page{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:78px 20px 120px;text-align:center}
+  .eyebrow{color:var(--amber);letter-spacing:5px;font-size:14px;font-weight:600;text-transform:uppercase}
+  h1{font-family:'Great Vibes',cursive;font-weight:400;font-size:clamp(52px,9vw,88px);line-height:1.3;margin-top:6px}
+  .dv{display:flex;align-items:center;justify-content:center;gap:12px;color:var(--gold);width:min(420px,70%);margin:8px auto 34px}
+  .dv::before,.dv::after{content:"";flex:1;height:1px;background:var(--gold)}
+
+  h2{font-weight:600;font-size:clamp(26px,4.4vw,42px);letter-spacing:2px;text-transform:uppercase;margin:30px 0 6px}
+
+  .fam{margin-top:10px;background:rgba(255,248,235,.88);border:1.5px solid var(--gold);border-radius:24px;padding:30px 22px;box-shadow:0 8px 22px rgba(122,15,43,.12)}
+  .fam p{font-size:clamp(17px,2.4vw,21px);line-height:1.6;margin:8px 0}
+  .fam .nm{font-size:clamp(22px,3.2vw,30px);font-weight:600}
+  .fam .lbl{color:var(--amber);letter-spacing:3px;font-size:13px;font-weight:600;text-transform:uppercase;margin-top:20px}
+  .thanks{margin-top:34px;font-style:italic;font-size:clamp(17px,2.4vw,21px)}
+
+  body.te{font-family:'Noto Serif Telugu','Cormorant Garamond',serif}
+  body.te h1{font-family:'Noto Serif Telugu',serif;font-weight:700;font-size:clamp(34px,6vw,58px)}
+  body.te h2{font-size:clamp(22px,3.6vw,34px);letter-spacing:0;text-transform:none}
+  body.te .eyebrow,body.te .fam .lbl{letter-spacing:0;text-transform:none}
+  body.te .fam p{line-height:1.8}
+
+  /* ---- timeline (desktop): events sit side by side on one golden line ---- */
+  .wave{position:relative;height:500px;max-width:1040px;margin:0 auto}
+  .wave .wv{position:absolute;inset:0;width:100%;height:100%;z-index:0;overflow:visible}
+  .wave .w1{fill:none;stroke:rgba(200,148,46,.22);stroke-width:14;vector-effect:non-scaling-stroke}
+  .wave .w2{fill:none;stroke:#a97b1f;stroke-width:3;vector-effect:non-scaling-stroke}
+  .evg{display:contents}
+  .nd{position:absolute;z-index:2;left:calc(var(--x) * 1%);top:calc(var(--y) * 1px);transform:translate(-50%,-50%);
+    width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;
+    background:radial-gradient(circle at 35% 30%,#fff3cf,#e2b24c);border:3px solid #fff3cf;
+    box-shadow:0 0 0 5px rgba(200,148,46,.25),0 0 18px rgba(224,160,40,.7);animation:glow 2.6s ease-in-out infinite}
+  .evg.main .nd{width:76px;height:76px;font-size:32px;color:#fff;background:radial-gradient(circle at 35% 30%,#b3163f,#5a0b1e)}
+  @keyframes glow{0%,100%{box-shadow:0 0 0 5px rgba(200,148,46,.25),0 0 14px rgba(224,160,40,.5)}50%{box-shadow:0 0 0 9px rgba(200,148,46,.15),0 0 28px rgba(224,160,40,.95)}}
+
+  .it{position:absolute;z-index:1;left:calc(var(--x) * 1%);top:calc(var(--y) * 1px + 56px);transform:translateX(-50%);width:min(330px,calc(100% / var(--n) - 20px))}
+  .it::after{content:"";position:absolute;left:50%;bottom:100%;height:56px;border-left:1.5px dashed var(--gold)}
+
+  .ec{position:relative;background:rgba(255,248,235,.95);border:1.5px solid var(--gold);border-radius:20px;padding:26px 20px 22px;box-shadow:0 8px 22px rgba(122,15,43,.14);
+    opacity:0;transform:translateY(24px);transition:opacity .8s,transform .8s}
+  .ec.in{opacity:1;transform:none}
+  .evg.main .ec{background:linear-gradient(160deg,#8a2335,#4a0a18);color:#f8e6b8;border-color:#f1d9a8;box-shadow:0 12px 30px rgba(122,15,43,.4)}
+  .ec .dt{color:var(--amber);letter-spacing:3px;font-size:13px;font-weight:600;text-transform:uppercase}
+  .evg.main .dt{color:#f1c76a}
+  .ec h3{font-size:clamp(22px,3vw,30px);font-weight:600;margin:4px 0 2px;text-transform:uppercase;letter-spacing:1px}
+  .ec .tm{font-size:clamp(19px,2.6vw,24px);font-weight:600;margin-bottom:6px}
+  .ec .nt{font-style:italic;opacity:.85;font-size:clamp(15px,2vw,18px);line-height:1.5}
+  .ec .pl{margin-top:10px;font-size:clamp(15px,2vw,18px)}
+  .ec .go{display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:11px 24px;border-radius:50px;text-decoration:none;font-weight:700;font-size:14px;letter-spacing:1px;
+    background:linear-gradient(#f2cd72,#c8942e);color:#4a0a18;box-shadow:0 4px 12px rgba(200,148,46,.45);transition:transform .2s}
+  .ec .go:hover{transform:scale(1.06)}
+  .badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);white-space:nowrap;padding:4px 14px;border-radius:20px;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+    background:linear-gradient(#f2cd72,#c8942e);color:#4a0a18}
+  .badge.done{background:#e8d9c0;color:#8a6a3a}
+  body.te .ec h3,body.te .ec .dt,body.te .badge,body.te .ec .go{letter-spacing:0;text-transform:none}
+  body.te .ec h3{font-size:clamp(19px,2.6vw,25px)}
+
+  /* ---- timeline on phones: simple vertical line ---- */
+  @media(max-width:760px){
+    .wave{height:auto;padding:6px 0}
+    .wave::before{content:"";position:absolute;left:26px;top:0;bottom:0;width:3px;margin-left:-1.5px;border-radius:3px;
+      background:linear-gradient(transparent,var(--gold) 6%,var(--gold) 94%,transparent)}
+    .wave .wv{display:none}
+    .evg{display:block;position:relative;padding-left:74px;margin-bottom:42px;text-align:left}
+    .nd,.evg.main .nd{position:absolute;left:0;top:18px;transform:none;width:52px;height:52px;font-size:22px}
+    .it{position:static;transform:none;width:auto}
+    .it::after{display:none}
+    .badge{left:18px;transform:none}
+  }
+
+  /* ---- zoom-in when this page opens (continues the zoom from the first page) ---- */
+  .page{animation:arrive .9s cubic-bezier(.2,.8,.2,1)}
+  @keyframes arrive{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){.page{animation:none}}
+</style>
+</head>
+<body>
+  <div class="corner tl"><img alt=""></div>
+  <div class="corner tr"><img alt=""></div>
+  <div class="corner br"><img alt=""></div>
+  <div class="corner bl"><img alt=""></div>
+
+  <a class="back" href="/details/" title="Back">‹</a>
+  <div class="lang">
+    <button type="button" class="mus" id="mus" title="Music">🔇</button>
+    <button type="button" data-l="en" title="English">A</button>
+    <button type="button" data-l="te" title="తెలుగు">అ</button>
+  </div>
+
+  <main class="page">
+    <p class="eyebrow" data-i18n="eb">Sri Venkateswara Swamyvari Ashissulatho</p>
+    <h1 data-i18n="t">Wedding Details</h1>
+    <div class="dv"><span>❁</span></div>
+
+    <section class="wave" id="tl"></section>
+
+    <h2 data-i18n="fh">With Families' Blessings</h2>
+    <div class="dv"><span>❁</span></div>
+    <section class="fam">
+      <p data-i18n="f1">We solicit your gracious presence with family and friends on the auspicious occasion of the marriage of our only son</p>
+      <p class="nm" data-i18n="f2">Chi. Dileep Kumar weds Chi. La. Sow. Sirisha</p>
+      <p data-i18n="f3">(D/o. Sri Palavali Nageswara Reddy &amp; Smt. Suguna)</p>
+      <p class="lbl" data-i18n="f4">Invited by</p>
+      <p class="nm" data-i18n="f5">Sri Padala Gopala Rao – Smt. Rama Devi</p>
+      <p data-i18n="f6">S. Palem village, Meliyaputti Mandal</p>
+      <p class="lbl" data-i18n="f7">With best compliments from</p>
+      <p data-i18n="f8">Sri Padala Gangadhar Rao – Krishnaveni, Sunder Rao – Vasantha Kumari, Venkata Rao – Drakshaveni and all relatives &amp; friends</p>
+    </section>
+    <p class="thanks" data-i18n="th">Your presence will make our happiness even more special…</p>
+  </main>
+
+<script>
+  /* ===== FILE PATHS: change these two lines if your image / music files are somewhere else ===== */
+  var IMG='../../static/invitation/images/opening.jpeg';
+  var MUSIC='../../static/invitation/audio/song.mp3';
+
+  document.querySelectorAll('.corner img').forEach(function(im){im.src=IMG});
+
+  /* ===== EVENTS: add more events here (copy one block). start = IST date/time ===== */
+  var DEST='A & A Farm House, Near NICMAR College, Lalgadi Malakpet, Aliyabad, Hyderabad';
+  var EVENTS=[
+    {start:'2026-12-03T09:03:00+05:30',icon:'💖',main:true,
+     day:{en:'Thu · Dec 3',te:'గురు · డిసెం 3'},
+     title:{en:'Sumuhurtham',te:'సుముహూర్తం'},
+     time:{en:'9:03 AM · Dhanussu Lagnam',te:'ఉదయం 9:03 · ధనుస్సు లగ్నం'},
+     note:{en:'Uttara Nakshatra · Pushkarāmsa auspicious moment',te:'ఉత్తరా నక్షత్రయుక్త ధనుస్సు లగ్న పుష్కరాంశ సుముహూర్తం'},
+     place:{en:'A & A Farm House, Aliyabad',te:'అ & ఆ ఫార్మ్ హౌస్, అలియాబాద్'}},
+    {start:'2026-12-03T12:00:00+05:30',icon:'🍽️',main:false,
+     day:{en:'Thu · Dec 3',te:'గురు · డిసెం 3'},
+     title:{en:'Lunch',te:'విందు'},
+     time:{en:'12:00 noon onwards',te:'మధ్యాహ్నం 12:00 నుండి'},
+     note:{en:'Join us for the wedding feast',te:'వివాహ భోజనానికి విచ్చేయండి'},
+     place:{en:'A & A Farm House, Aliyabad',te:'అ & ఆ ఫార్మ్ హౌస్, అలియాబాద్'}}
+  ];
+  var TL={en:{main:'The Main Event',next:'Up next',done:'Done',go:'Get Directions'},te:{main:'ప్రధాన వేడుక',next:'తదుపరి',done:'పూర్తయింది',go:'దారి చూపించు'}};
+  var io=null;
+  var WAVE_H=500,LINE_Y=60;   /* WAVE_H must match .wave height in CSS */
+  function renderTL(l){
+    var box=document.getElementById('tl');if(!box)return;
+    var n=EVENTS.length,now=Date.now(),nextDone=false,h='';
+    box.style.setProperty('--n',n);
+    EVENTS.forEach(function(e,i){
+      var x=(i+.5)/n*100,b='';
+      var st=new Date(e.start).getTime();
+      if(now>st+3*3600000)b='<span class="badge done">'+TL[l].done+'</span>';
+      else if(!nextDone){nextDone=true;b='<span class="badge">'+(e.main?TL[l].main:TL[l].next)+'</span>'}
+      else if(e.main)b='<span class="badge">'+TL[l].main+'</span>';
+      h+='<div class="evg'+(e.main?' main':'')+'" style="--x:'+x+';--y:'+LINE_Y+'">'+
+        '<div class="nd">'+e.icon+'</div>'+
+        '<div class="it"><div class="ec">'+b+
+        '<div class="dt">'+e.day[l]+'</div><h3>'+e.title[l]+'</h3><div class="tm">'+e.time[l]+'</div>'+
+        '<p class="nt">'+e.note[l]+'</p><p class="pl">📍 '+e.place[l]+'</p>'+
+        '<a class="go" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination='+encodeURIComponent(DEST)+'">🧭 '+TL[l].go+'</a></div></div></div>';
+    });
+    var d='M0,'+LINE_Y+' L1000,'+LINE_Y;
+    var svg='<svg class="wv" viewBox="0 0 1000 '+WAVE_H+'" preserveAspectRatio="none" aria-hidden="true"><path class="w1" d="'+d+'"/><path class="w2" d="'+d+'"/></svg>';
+    if(io){io.disconnect();io=null}
+    box.innerHTML=svg+h;
+    var els=box.querySelectorAll('.ec');
+    if('IntersectionObserver' in window){
+      io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{threshold:.15});
+      els.forEach(function(el){io.observe(el)});
+    }else{els.forEach(function(el){el.classList.add('in')})}
+  }
+</script>
+<script>
+  var T={
+    en:{eb:"Sri Venkateswara Swamyvari Ashissulatho",t:"Wedding Details",fh:"With Families' Blessings",
+        f1:"We solicit your gracious presence with family and friends on the auspicious occasion of the marriage of our only son",
+        f2:"Chi. Dileep Kumar weds Chi. La. Sow. Sirisha",f3:"(D/o. Sri Palavali Nageswara Reddy &amp; Smt. Suguna)",
+        f4:"Invited by",f5:"Sri Padala Gopala Rao – Smt. Rama Devi",f6:"S. Palem village, Meliyaputti Mandal",
+        f7:"With best compliments from",f8:"Sri Padala Gangadhar Rao – Krishnaveni, Sunder Rao – Vasantha Kumari, Venkata Rao – Drakshaveni and all relatives &amp; friends",
+        th:"Your presence will make our happiness even more special…"},
+    te:{eb:"శ్రీ వేంకటేశ్వర స్వామివారి ఆశీస్సులతో",t:"వివాహ వివరాలు",fh:"కుటుంబాల ఆశీస్సులతో",
+        f1:"మా ఏకైక పుత్రుడు",
+        f2:"చి. దిలీప్ కుమార్ (ధిల్లేశ్వర రావు) కు చి.ల.సౌ. శిరీష (ప్రేరణ) ను ఇచ్చి వివాహము జరుపుటకు నిశ్చయించినారు",
+        f3:"(శ్రీ పలవలి నాగేశ్వరరెడ్డి – శ్రీమతి సుగుణ దంపతుల ప్రథమ పుత్రిక)",
+        f4:"ఆహ్వానించువారు",f5:"శ్రీ పడాల గోపాల రావు – శ్రీమతి రమాదేవి",f6:"ఎస్. పాలెం గ్రామం, మెలియాపుట్టి మండలం",
+        f7:"అభినందనలతో",f8:"శ్రీ పడాల గంగాధర్ రావు – కృష్ణవేణి, సుందర్ రావు – వసంత కుమారి, వెంకట రావు – ద్రాక్షవేణి మరియు బంధుమిత్రులు",
+        th:"మీ రాక మా ఆనందాన్ని మరింత ప్రత్యేకం చేస్తుంది…"}
+  };
+  function setLang(l){
+    document.querySelectorAll('[data-i18n]').forEach(function(e){e.innerHTML=T[l][e.dataset.i18n]});
+    document.body.classList.toggle('te',l==='te');
+    document.documentElement.lang=l;renderTL(l);
+    document.querySelectorAll('.lang button[data-l]').forEach(function(b){b.classList.toggle('on',b.dataset.l===l)});
+    try{localStorage.setItem('lang',l)}catch(e){}
+  }
+  document.querySelectorAll('.lang button[data-l]').forEach(function(b){b.onclick=function(){setLang(b.dataset.l)}});
+  var saved='en';try{saved=localStorage.getItem('lang')||'en'}catch(e){}
+  setLang(saved);
+
+  /* ---- music button ---- */
+  var audio=null,musBtn=document.getElementById('mus');
+  function musIcon(){musBtn.textContent=(audio&&!audio.paused)?'🔊':'🔇'}
+  musBtn.onclick=function(){
+    if(!audio){audio=new Audio(MUSIC);audio.loop=true;audio.onpause=musIcon;audio.onplay=musIcon}
+    if(audio.paused){var pr=audio.play();if(pr&&pr.catch)pr.catch(function(){musIcon()})}
+    else{audio.pause()}
+    musIcon();
+  };
+
+  for(var i=0;i<16;i++){
+    var p=document.createElement('i');p.className='petal';
+    var s=10+Math.random()*10;
+    p.style.cssText='left:'+Math.random()*100+'%;width:'+s+'px;height:'+(s*1.4)+'px;animation-duration:'+(9+Math.random()*9)+'s;animation-delay:-'+Math.random()*14+'s';
+    document.body.appendChild(p);
+  }
+
+  /* auto scroll: starts after a short delay, pauses when the user interacts, resumes when idle */
+  (function(){
+    var SPEED = 50;       // pixels per second (lower = slower)
+    var DELAY = 3000;     // wait before the first start (ms)
+    var RESUME = 2500;    // idle time after the user stops before it resumes (ms)
+    var running = false, pos = 0, last = 0, timer = null;
+    var evts = ['wheel','touchstart','touchmove','touchend','keydown','mousedown','mouseup'];
+
+    function step(ts){
+      if(!running) return;
+      if(!last) last = ts;
+      var dt = (ts - last) / 1000;
+      last = ts;
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      pos += SPEED * dt;
+      if(pos >= max){ window.scrollTo(0, max); running = false; return; }
+      window.scrollTo(0, pos);
+      requestAnimationFrame(step);
+    }
+
+    function start(){
+      if(running) return;
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      if((window.scrollY || 0) >= max - 2) return;   // already at the bottom
+      pos = window.scrollY || 0;
+      running = true;
+      last = 0;
+      requestAnimationFrame(step);
+    }
+
+    // any user action: pause now, resume after RESUME ms of no activity
+    function onUser(){
+      running = false;
+      clearTimeout(timer);
+      timer = setTimeout(start, RESUME);
+    }
+
+    evts.forEach(function(n){ window.addEventListener(n, onUser, {passive:true}); });
+    timer = setTimeout(start, DELAY);
+  })();
+</script>
+</body>
+</html>
